@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Les petits plats</title>
+
+    <link rel="icon" type="image/png" href="assets/favicon.ico" />
+    <link href="assets/css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <a href="/">
+          <img
+            src="assets/images/logo.png"
+            width="268"
+            class="logo"
+            alt="Les petits plats"
+          />
+        </a>
+      </header>
+
+      <main id="main">
+        <!-- Search form -->
+        <form id="searchRecipe">
+          <input type="search" placeholder="Rechercher une recette">
+          <img src="assets/icons/search.svg">
+        </form>
+        <!-- End search form -->
+
+
+        <!-- Tags -->
+        <div class="tags-container">
+          <div class="tags">
+            <span>Coco</span>
+            <img src="assets/icons/close.svg">
+          </div>
+        </div>
+        <!-- End tags -->
+
+
+        <!-- Dropdowns -->
+        <div class="dropdowns-container">
+          <div class="dropdown dd-ingredients">
+            <span>Ingredients</span>
+            <img src="assets/icons/arrow-down.svg">
+          </div>
+
+          <div class="dropdown dd-appareils">
+            <span>Appareils</span>
+            <img src="assets/icons/arrow-down.svg">
+          </div>
+
+          <div class="dropdown dd-ustensiles">
+            <span>Ustensiles</span>
+            <img src="assets/icons/arrow-down.svg">
+          </div>
+        </div>
+        <!-- End dropdowns -->
+
+
+        <div class="recipes-list">
+
+          <article class="recipe-card">
+            <div class="img"></div>
+
+            <div class="recipe-card__container">
+              <div class="infos">
+                <h2 class="title">Limonade de Coco</h2>
+                <div class="hour">
+                  <img src="assets/icons/clock.svg">
+                  <span>10 min</span>
+                </div>
+              </div>
+              <div class="details">
+                <ul>
+                  <li>Lait de coco: 400ml</li>
+                  <li>Jus de citron: 2</li>
+                  <li>Créme de coco: 4 cuillères</li>
+                  <li>Sucre: 20g</li>
+                  <li>Glaçons: 2</li>
+                </ul>
+
+                <p>
+                  Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <div class="img"></div>
+
+            <div class="recipe-card__container">
+              <div class="infos">
+                <h2 class="title">Limonade de Coco</h2>
+                <div class="hour">
+                  <img src="assets/icons/clock.svg">
+                  <span>10 min</span>
+                </div>
+              </div>
+              <div class="details">
+                <ul>
+                  <li>Lait de coco: 400ml</li>
+                  <li>Jus de citron: 2</li>
+                  <li>Créme de coco: 4 cuillères</li>
+                  <li>Sucre: 20g</li>
+                  <li>Glaçons: 2</li>
+                </ul>
+
+                <p>
+                  Découper le poulet en morceaux, les faire dorer dans une cocotte avec de l'huile d'olive. Salez et poivrez. Une fois doré, laisser cuire en ajoutant de l'eau. Au bout de 30 minutes, ajouter le coulis de tomate, le lait de coco ainsi que le poivron et l'oignon découpés en morceaux. Laisser cuisiner 30 minutes de plus. Servir avec du riz
+                </p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </main>
+    </div>
+
+    <script
+      type="module"
+      src="/Front-End-Fisheye/scripts/pages/index.js"
+    ></script>
+  </body>
+</html>
