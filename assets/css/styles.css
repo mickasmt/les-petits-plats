@@ -72,17 +72,18 @@ header {
   margin-bottom: 15px;
 }
 
-.tags {
+.tag {
   height: 37px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 20px;
   border-radius: 5px;
+  margin-right: 10px;
   background-color: var(--blue-bg-color);
 }
 
-.tags span {
+.tag span {
   color: #fff;
   font-size: 14px;
   line-height: 16.8px;
@@ -90,7 +91,7 @@ header {
   margin-right: 13px;
 }
 
-.tags img,
+.tag img,
 .recipe-card__container .infos .hour img {
   width: 20px;
   height: 20px;
