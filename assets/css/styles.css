@@ -18,6 +18,11 @@ ul {
   list-style: none;
 }
 
+input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Lato", sans-serif;
 }
@@ -106,9 +111,7 @@ header {
 }
 
 .dropdown {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative;
   padding: 23px 15px;
   border-radius: 5px;
   width: 170px;
@@ -116,19 +119,60 @@ header {
   margin-right: 20px;
 }
 
-.dropdown span {
+.dropdown-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-button form input,
+.dropdown-button form label  {
   color: #fff;
   font-size: 18px;
-  line-height: 21.6px;
-  /* font-weight: 700; */
-  margin-right: 35px;
 }
 
-.dropdown img {
+.dropdown-button form input {
+  position: relative;
+  background-color: transparent;
+  height: 26px;
+  outline: none;
+  border: none;
+}
+
+.dropdown-button form input::placeholder {
+  /* color: rgba(255, 255, 255, 0.25); */
+  color: transparent;
+}
+
+.dropdown-button form label {
+  position: absolute;
+  /* display: none; */
+}
+
+.dropdown-button img {
+  flex: 1;
   width: 16px;
   height: 9px;
-
+  margin-left: 35px;
 }
+
+.dropdown-list {
+  z-index: 10;
+  position: absolute;
+  border-radius: 0 0 5px 5px;
+  overflow: hidden;
+  top: 65px;
+  left: 0px;
+  width: 100%;
+  color: #fff;
+  font-size: 18px;
+  padding: 0px 15px 6px 15px;
+}
+
+.dropdown-list ul li {
+  padding-bottom: 10px;
+}
+
 .dd-ingredients {
   background-color: var(--blue-bg-color);
 }
