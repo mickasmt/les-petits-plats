@@ -5,46 +5,87 @@
  export function recipeFactory(data) {
   const { id, name, serving, ingredients, time, description, appliances, ustensiles } = data;
 
+
+  /**Check if image or video field is in data object and return DOM element
+  */
+  function checkUnitIngredient(ingredient) {
+    if(Object.prototype.hasOwnProperty.call(ingredient, "unit")) {
+      return ingredient.unit;
+    } else {
+      return '';
+    }
+  }
+
   /**Create and return one user card DOM for index.html
    */
   function renderRecipeCardDOM() {
       const article = document.createElement( 'article');
+      article.classList.add('recipe-card');
 
-      // create title 
-      const h2 = document.createElement( 'h2' );
-      h2.textContent = name();
+      // create fake img content
+      const fakeImg = document.createElement('div');
+      fakeImg.classList.add('img');
 
-      // create link for to go photographer page
-      const a = document.createElement( 'a' );
-      a.setAttribute("href", url);
-      a.appendChild(img);
-      a.appendChild(h2);
+      // create ingredients list
+      const ingList = document.createElement( 'ul' );
 
-      // create paragraphe for city / country
-      const location = document.createElement( 'p' );
-      location.textContent = city +", "+ country;
-      location.classList.add("location");
+      ingredients.forEach(element => {
+        const li = document.createElement( 'li' );
+        const bold = document.createElement( 'b' );
+        bold.textContent = element.ingredient;
+        
+        let line = bold.innerHTML + " : " + element.quantity + " " + checkUnitIngredient(element);
+
+        li.innerHTML = line;
+        ingList.appendChild(li);
+      });
+
+      // create recipe description 
+      const descriptionPar = document.createElement( 'p' );
+      descriptionPar.textContent = description;
+
+      // assemble details content
+      const details = document.createElement( 'div' );
+      details.classList.add('details');
+      details.appendChild(ingList);
+      details.appendChild(descriptionPar);
+
       
-      // create paragraphe for tagline
-      const taglinePar = document.createElement( 'p' );
-      taglinePar.textContent = tagline;
-      taglinePar.classList.add("tagline");
+      // create title recipe
+      const title = document.createElement( 'h2' );
+      title.classList.add("title");
+      title.textContent = name;
 
+      // create clock img
+      const clockImg = document.createElement( 'img' );
+      clockImg.src = "assets/icons/clock.svg";
+      clockImg.alt = "clock";
 
-      // create paragraphe for price
-      const pricePar = document.createElement( 'p' );
-      pricePar.textContent = price +"€/jour";
-      pricePar.classList.add("price");
-      
-      // create div for static text (city, country, tagline, price)
-      const div = document.createElement( 'div' );
-      div.appendChild(location);
-      div.appendChild(taglinePar);
-      div.appendChild(pricePar);
+      // create clock span
+      const clockSpan = document.createElement( 'span' );
+      clockSpan.textContent = time + " min";
+
+      // create icon/hour content
+      const hourInfos = document.createElement( 'div' );
+      hourInfos.classList.add('hour');
+      hourInfos.appendChild(clockImg);
+      hourInfos.appendChild(clockSpan);
+
+      // assemble title/time
+      const infos = document.createElement( 'div' );
+      infos.classList.add('infos');
+      infos.appendChild(title);
+      infos.appendChild(hourInfos);
+
+      // assemble title/time
+      const recipeContainer = document.createElement( 'div' );
+      recipeContainer.classList.add('recipe-card__container');
+      recipeContainer.appendChild(infos);
+      recipeContainer.appendChild(details);
 
       // create article
-      article.appendChild(a);
-      article.appendChild(div);
+      article.appendChild(fakeImg);
+      article.appendChild(recipeContainer);
 
       return (article);
   }

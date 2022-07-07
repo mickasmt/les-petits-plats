@@ -6,7 +6,7 @@ import { recipes } from "../../data/recipes.js";
  */
 async function getRecipes() {    
     console.log(recipes.splice(0, 12));
-    return recipes;
+    return recipes.splice(0, 12);
 }
 
 
@@ -15,6 +15,7 @@ async function getRecipes() {
  */
 async function displayData(recipes) {
     const recipesSection = document.querySelector(".recipes-list");
+console.log(recipesSection);
 
     recipes.forEach((recipe) => {
         const recipeModel = recipeFactory(recipe);
@@ -26,9 +27,10 @@ async function displayData(recipes) {
 /**Initialize the index page
  */
 async function init() {
-    // Récupère les datas des photographes
-    const { recipes } = await getRecipes();
-    // displayData(recipes);
+    // get recipes
+    const recipes = await getRecipes();
+    // display recipes
+    displayData(recipes);
 }
 
 init();
