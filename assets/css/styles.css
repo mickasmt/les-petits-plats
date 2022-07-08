@@ -249,9 +249,14 @@ header {
 
 .recipe-card__container .details p {
   width: 172px;
+  height: min-content;
   font-family: 'Roboto', sans-serif;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 6;
+}
+
+.recipe-card__container .details ul li::first-letter {
+  text-transform: capitalize;
 }

@@ -4,8 +4,7 @@ import { recipes } from "../../data/recipes.js";
 
 /**Return all recipes in array
  */
-async function getRecipes() {    
-    console.log(recipes.splice(0, 12));
+async function getRecipes() {
     return recipes.splice(0, 12);
 }
 

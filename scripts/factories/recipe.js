@@ -8,6 +8,16 @@
 
   /**Check if image or video field is in data object and return DOM element
   */
+   function checkQuantityIngredient(ingredient) {
+    if(Object.prototype.hasOwnProperty.call(ingredient, "quantity")) {
+      return (": "+ingredient.quantity + " ");
+    } else {
+      return '';
+    }
+  }
+
+  /**Check if field unit ingredient
+  */
   function checkUnitIngredient(ingredient) {
     if(Object.prototype.hasOwnProperty.call(ingredient, "unit")) {
       return ingredient.unit;
@@ -30,11 +40,8 @@
       const ingList = document.createElement( 'ul' );
 
       ingredients.forEach(element => {
-        const li = document.createElement( 'li' );
-        const bold = document.createElement( 'b' );
-        bold.textContent = element.ingredient;
-        
-        let line = bold.innerHTML + " : " + element.quantity + " " + checkUnitIngredient(element);
+        const li = document.createElement( 'li' );        
+        const line = element.ingredient.bold() + checkQuantityIngredient(element) + checkUnitIngredient(element);
 
         li.innerHTML = line;
         ingList.appendChild(li);
