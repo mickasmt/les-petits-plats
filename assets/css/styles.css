@@ -96,7 +96,13 @@ header {
   margin-right: 13px;
 }
 
-.tag img,
+.tag button {
+  border: none;
+  background-color: transparent;
+  cursor:pointer;
+}
+
+.tag button,
 .recipe-card__container .infos .hour img {
   width: 20px;
   height: 20px;
