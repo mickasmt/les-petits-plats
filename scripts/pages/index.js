@@ -2,33 +2,33 @@
 import { recipeFactory } from "../factories/recipe.js";
 import { recipes } from "../../data/recipes.js";
 
-/**Return all recipes in array
- */
-async function getRecipes() {
-    return recipes.splice(0, 6);
-}
-
+// GLOBAL VARIABLES
+window.recipesData = recipes;
 
 /**Add all cards recipes in photographer_section on index.html
  * @param  {object} recipes Data of all recipes
  */
-async function displayData(recipes) {
+export async function displayData(recipes) {
     const recipesSection = document.querySelector(".recipes-list");
+    recipesSection.innerHTML = '';
 
-    recipes.forEach((recipe) => {
-        const recipeModel = recipeFactory(recipe);
-        const recipeCardDOM = recipeModel.renderRecipeCardDOM();
-        recipesSection.insertAdjacentHTML('beforeend', recipeCardDOM);
-    });
+    if(recipes.length > 0) {
+        recipes.forEach((recipe) => {
+            const recipeModel = recipeFactory(recipe);
+            const recipeCardDOM = recipeModel.renderRecipeCardDOM();
+            recipesSection.insertAdjacentHTML('beforeend', recipeCardDOM);
+        });
+    } else {
+        recipesSection.innerHTML = "Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.";
+    }
+
 }
 
 /**Initialize the index page
  */
 async function init() {
-    // get recipes
-    const recipes = await getRecipes();
     // display recipes
-    displayData(recipes);
+    displayData(recipesData.slice(0, 6));
 }
 
 init();
