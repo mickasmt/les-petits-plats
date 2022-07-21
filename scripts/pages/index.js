@@ -13,12 +13,17 @@ export async function displayData(recipes) {
     recipesSection.innerHTML = '';
 
     if(recipes.length > 0) {
+        // remove fles css if suggest already display
+        recipesSection.classList.remove('recipes-suggest');
+
         recipes.forEach((recipe) => {
             const recipeModel = recipeFactory(recipe);
             const recipeCardDOM = recipeModel.renderRecipeCardDOM();
             recipesSection.insertAdjacentHTML('beforeend', recipeCardDOM);
         });
     } else {
+        // add fless css for suggestion error
+        recipesSection.classList.add('recipes-suggest');
         recipesSection.innerHTML = "Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.";
     }
 

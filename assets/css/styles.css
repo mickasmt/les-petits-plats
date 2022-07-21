@@ -199,6 +199,11 @@ header {
   gap: 50px;
 }
 
+.recipes-suggest {
+  display: flex!important;
+  justify-content: center;
+}
+
 .recipe-card {
   width: 380px;
   height: 364px;
