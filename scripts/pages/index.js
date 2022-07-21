@@ -5,7 +5,7 @@ import { recipes } from "../../data/recipes.js";
 /**Return all recipes in array
  */
 async function getRecipes() {
-    return recipes.splice(0, 12);
+    return recipes.splice(0, 6);
 }
 
 
@@ -14,12 +14,11 @@ async function getRecipes() {
  */
 async function displayData(recipes) {
     const recipesSection = document.querySelector(".recipes-list");
-console.log(recipesSection);
 
     recipes.forEach((recipe) => {
         const recipeModel = recipeFactory(recipe);
         const recipeCardDOM = recipeModel.renderRecipeCardDOM();
-        recipesSection.appendChild(recipeCardDOM);
+        recipesSection.insertAdjacentHTML('beforeend', recipeCardDOM);
     });
 }
 
