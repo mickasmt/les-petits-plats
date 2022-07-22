@@ -3,6 +3,7 @@ import { recipeFactory } from "../factories/recipe.js";
 import { recipes } from "../../data/recipes.js";
 
 // GLOBAL VARIABLES
+window.results = [];
 window.recipesData = recipes;
 
 /**Add all cards recipes in photographer_section on index.html
@@ -13,7 +14,7 @@ export async function displayData(recipes) {
     recipesSection.innerHTML = '';
 
     if(recipes.length > 0) {
-        // remove fles css if suggest already display
+        // remove flex css if suggest already display
         recipesSection.classList.remove('recipes-suggest');
 
         recipes.forEach((recipe) => {

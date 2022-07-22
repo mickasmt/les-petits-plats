@@ -1,11 +1,13 @@
 // IMPORTS
 import { displayData } from "../pages/index.js";
+import { updateDropdowns } from "./dropdown.js";
 
 // VARIABLES
 var mainSearchForm = document.getElementById("mainSearch");
 
 // EVENTS
 mainSearchForm.addEventListener('input', (e) => filteredRecipes(e));
+
 
 /**
  * Search recipes (in name/description/ingredients) with value input
@@ -27,7 +29,9 @@ async function filteredRecipes(e) {
       
       // check if value is present in name / description
       if (name.includes(searchString) || desc.includes(searchString)) {
-        results.push(recipe);
+        if (results.indexOf(recipe) === -1) {
+          results.push(recipe);
+        }
       }
       
       // check if value is present in ingredients
@@ -35,14 +39,28 @@ async function filteredRecipes(e) {
         const ing = ingredients[j].ingredient.toLowerCase();
         
         if (ing.includes(searchString)) {
-          results.push(recipe);
+          if (results.indexOf(recipe) === -1) {
+            results.push(recipe);
+          }
         }
       }
     }
     
+    window.results = results;
+    // console.log(window.results);
     displayData(results);
+    updateDropdowns(results);
   } else {
     displayData(recipes.slice(0,6));
   }
+}
+
+
+/**
+ * 
+ * @param {array} recipes recipes data (results after main search or recipesData if results is null)
+ * @param {string} tag tag value selected
+ */
+async function filteredRecipesByTag(recipes, tag) {
 
 }
