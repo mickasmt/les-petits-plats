@@ -20,7 +20,7 @@ export async function displayData(recipes) {
         recipes.forEach((recipe) => {
             const recipeModel = recipeFactory(recipe);
             const recipeCardDOM = recipeModel.renderRecipeCardDOM();
-            recipesSection.insertAdjacentHTML('beforeend', recipeCardDOM);
+            recipesSection.appendChild(recipeCardDOM);
         });
     } else {
         // add fless css for suggestion error
