@@ -32,6 +32,10 @@ body {
   margin: 0 auto;
 }
 
+.w-full {
+  width: 100%!important;
+}
+
 header {
   display: flex;
   flex-direction: row;
@@ -175,6 +179,12 @@ header {
   padding: 0px 15px 6px 15px;
 }
 
+.dropdown-list ul {
+  columns: 3;
+  -webkit-columns: 3;
+  -moz-columns: 3;
+}
+
 .dropdown-list ul li {
   padding-bottom: 10px;
 }
@@ -268,6 +278,7 @@ header {
   -webkit-line-clamp: 6;
 }
 
+.dropdown-list ul li::first-letter,
 .recipe-card__container .details ul li::first-letter {
   text-transform: capitalize;
 }

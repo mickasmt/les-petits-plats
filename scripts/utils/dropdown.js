@@ -4,6 +4,9 @@ var ddAppareilsElt = document.getElementById("dd-appareils");
 var ddUstensilesElt = document.getElementById("dd-ustensiles");
 
 
+// FUNCTIONS
+
+
 export function updateDropdowns(data) {
   const { ingredients, appareils, ustensiles } = extractArraysData(data);
 
@@ -12,9 +15,10 @@ export function updateDropdowns(data) {
   let ddUstensiles = new Dropdown(ddUstensilesElt, ustensiles);
   
   ddIngredient.renderList();
-  ddAppareils.renderList();
-  ddUstensiles.renderList();
+  // ddAppareils.renderList();
+  // ddUstensiles.renderList();
 }
+
 
 function extractArraysData(data) {
   let ingredients = [];
@@ -63,9 +67,6 @@ function extractArraysData(data) {
   };
 }
 
-// FUNCTIONS
-
-// extrait les tableaux ingredient / appareils / ustensiles des resultats
 
 // maj chaque dropdown avec les tableaux
 
@@ -74,3 +75,5 @@ function extractArraysData(data) {
 // open dropdown list after button img
 
 // cacher label et afficher liste quand clique sur input
+
+// creer un tableau pour les tags selectionnés

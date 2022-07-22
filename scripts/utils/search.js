@@ -1,9 +1,11 @@
 // IMPORTS
 import { displayData } from "../pages/index.js";
 import { updateDropdowns } from "./dropdown.js";
+import { recipes } from "../../data/recipes.js";
 
 // VARIABLES
 var mainSearchForm = document.getElementById("mainSearch");
+export let results = new Array;
 
 // EVENTS
 mainSearchForm.addEventListener('input', (e) => filteredRecipes(e));
@@ -15,12 +17,10 @@ mainSearchForm.addEventListener('input', (e) => filteredRecipes(e));
  */
 async function filteredRecipes(e) {
   const searchString = e.target.value.toLowerCase();
-  let recipes = window.recipesData;
-  let results = new Array;
+  let res = new Array;
 
   // if input value is superior at 2
   if(searchString.length > 2) {
-
     for(let i = 0; i < recipes.length; i++) {
       const recipe = recipes[i];
       const name = recipe.name.toLowerCase();
@@ -29,8 +29,8 @@ async function filteredRecipes(e) {
       
       // check if value is present in name / description
       if (name.includes(searchString) || desc.includes(searchString)) {
-        if (results.indexOf(recipe) === -1) {
-          results.push(recipe);
+        if (res.indexOf(recipe) === -1) {
+          res.push(recipe);
         }
       }
       
@@ -39,19 +39,20 @@ async function filteredRecipes(e) {
         const ing = ingredients[j].ingredient.toLowerCase();
         
         if (ing.includes(searchString)) {
-          if (results.indexOf(recipe) === -1) {
-            results.push(recipe);
+          if (res.indexOf(recipe) === -1) {
+            res.push(recipe);
           }
         }
       }
     }
     
-    window.results = results;
-    // console.log(window.results);
+    results = res;
+
     displayData(results);
     updateDropdowns(results);
   } else {
-    displayData(recipes.slice(0,6));
+    displayData(recipes);
+    updateDropdowns(recipes);
   }
 }
 
