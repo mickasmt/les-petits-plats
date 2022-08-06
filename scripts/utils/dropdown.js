@@ -1,29 +1,30 @@
+import { Dropdown } from "../classes/dropdown.js";
+
 // VARIABLES
 var ddIngredientsElt = document.getElementById("dd-ingredients");
-var ddAppareilsElt = document.getElementById("dd-appareils");
-var ddUstensilesElt = document.getElementById("dd-ustensiles");
+var ddApplianceElt = document.getElementById("dd-appliance");
+var ddUstensilsElt = document.getElementById("dd-ustensils");
 
 
 // FUNCTIONS
 
-
 export function updateDropdowns(data) {
-  const { ingredients, appareils, ustensiles } = extractArraysData(data);
-
-  let ddIngredient = new Dropdown(ddIngredientsElt, ingredients);
-  let ddAppareils = new Dropdown(ddAppareilsElt, appareils);
-  let ddUstensiles = new Dropdown(ddUstensilesElt, ustensiles);
+  const { ingredients, appliances, ustensils } = extractArraysData(data);
   
-  ddIngredient.renderList();
-  // ddAppareils.renderList();
-  // ddUstensiles.renderList();
+  let ddIngredients = new Dropdown(ddIngredientsElt, ingredients, "ingredients");
+  let ddAppliance = new Dropdown(ddApplianceElt, appliances, "appliance");
+  let ddUstensils = new Dropdown(ddUstensilsElt, ustensils, "ustensils");
+  
+  ddIngredients.renderList();
+  ddAppliance.renderList();
+  ddUstensils.renderList();
 }
 
 
 function extractArraysData(data) {
   let ingredients = [];
-  let appareils = [];
-  let ustensiles = [];
+  let appliances = [];
+  let ustensils = [];
 
   if (data) {
     for (let i = 0; i < data.length; i++) {
@@ -45,16 +46,16 @@ function extractArraysData(data) {
         for(let j = 0; j < recipe.ustensils.length; j++) {
           const ust = recipe.ustensils[j];
           
-          if (ustensiles.indexOf(ust) === -1) {
-            ustensiles.push(ust);
+          if (ustensils.indexOf(ust) === -1) {
+            ustensils.push(ust);
           }
         }
       }
         
-      // create appareils array dropdown list
+      // create appliance array dropdown list
       if(recipe.appliance) {
-        if (appareils.indexOf(recipe.appliance) === -1) {
-          appareils.push(recipe.appliance);
+        if (appliances.indexOf(recipe.appliance) === -1) {
+          appliances.push(recipe.appliance);
         }
       }
     }
@@ -62,18 +63,7 @@ function extractArraysData(data) {
 
   return {
     ingredients,
-    appareils,
-    ustensiles
+    appliances,
+    ustensils
   };
 }
-
-
-// maj chaque dropdown avec les tableaux
-
-// dropdown
-
-// open dropdown list after button img
-
-// cacher label et afficher liste quand clique sur input
-
-// creer un tableau pour les tags selectionnés

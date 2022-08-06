@@ -31,8 +31,8 @@
 
 
         <!-- Tags -->
-        <div class="tags-container">
-          <div class="tag">
+        <div class="tags-container" id="tags-section">
+          <!-- <div class="tag">
             <span>Coco</span>
             <button >
               <img src="assets/icons/close.svg">
@@ -47,7 +47,7 @@
           <div class="tag">
             <span>Tomates</span>
             <img src="assets/icons/close.svg">
-          </div>
+          </div> -->
         </div>
         <!-- End tags -->
 
@@ -61,39 +61,39 @@
                 <label for="ingredients">Ingredients</label>
                 <input type="text" name="ingredients" id="ingredients" placeholder="Rechercher un ingredient">
               </form>
-              <img src="assets/icons/arrow-down.svg">
+              <img src="assets/icons/arrow-down.svg" tabindex="0" data-open="false">
             </div>
 
             <div class="dropdown-list dd-ingredients"></div>
           </div>
 
-          <div class="dropdown dd-appareils" id="dd-appareils">
+          <div class="dropdown dd-appliance" id="dd-appliance">
             <div class="dropdown-button">
               <form action="">
-                <label for="appareils">Appareils</label>
-                <input type="text" name="appareils" id="appareils" placeholder="Rechercher un appareil">
+                <label for="appliance">Appareils
+                <input type="text" name="appliance" id="appliance" placeholder="Rechercher un appareil">
+              </label>
               </form>
-              <img src="assets/icons/arrow-down.svg">
+              <img src="assets/icons/arrow-down.svg" tabindex="0" data-open="false">
             </div>
 
-            <div class="dropdown-list dd-appareils"></div>
+            <div class="dropdown-list dd-appliance"></div>
           </div>
 
-          <div class="dropdown dd-ustensiles" id="dd-ustensiles">
+          <div class="dropdown dd-ustensils" id="dd-ustensils">
             <div class="dropdown-button">
               <form action="">
                 <label for="ustensiles">Ustensiles</label>
                 <input type="text" name="ustensiles" id="ustensiles" placeholder="Rechercher un ustensile">
               </form>
-              <img src="assets/icons/arrow-down.svg" tabindex="0">
+              <img src="assets/icons/arrow-down.svg" tabindex="0" data-open="false">
             </div>
 
-            <div class="dropdown-list dd-ustensiles"></div>
+            <div class="dropdown-list dd-ustensils"></div>
           </div>
         
         </div>
         <!-- End dropdowns -->
-
 
         <div class="recipes-list">
 
@@ -129,8 +129,11 @@
       </main>
     </div>
 
-    <script src="scripts/classes/dropdown.js"></script>
+    <!-- SCRIPTS -->
     <script type="module" src="scripts/pages/index.js"></script>
     <script type="module" src="scripts/utils/search.js"></script>
+    <script type="module" src="scripts/classes/dropdown.js"></script>
+    <script type="module" src="scripts/utils/dropdown.js"></script>
+    <script type="module" src="scripts/utils/tag.js"></script>
   </body>
 </html>
