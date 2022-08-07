@@ -2,7 +2,6 @@
 import { displayData } from "../pages/index.js";
 import { updateDropdowns } from "./dropdown.js";
 import { recipes } from "../../data/recipes.js";
-import { updateTags } from "./tag.js";
 
 // VARIABLES
 export let tags  = new Array;
@@ -50,11 +49,9 @@ async function filteredRecipes(e) {
     
     results = res;
 
-    updateTags(tags);
     displayData(results);
     updateDropdowns(results);
   } else {
-    updateTags(tags);
     displayData(recipes);
     updateDropdowns(recipes);
   }
@@ -66,9 +63,15 @@ async function filteredRecipes(e) {
  * @param {array} recipes recipes data (results after main search or recipesData if results is null)
  * @param {string} tag tag value selected
  */
-export function filteredRecipesByTag(recipes, tagsSelected) {
-  // test tags
-  // updateTags(tags);
+export function filteredRecipesByTag(tagsSelected) {
+  // console.log(recipes);
+  // console.log(tagsSelected);
+
+  if(results.length > 0) {
+    updateDropdowns(results);
+  } else {
+    updateDropdowns(recipes);
+  }
 
   // const searchString = e.target.value.toLowerCase();
   // let res = new Array;

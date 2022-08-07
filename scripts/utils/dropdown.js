@@ -11,9 +11,9 @@ var ddUstensilsElt = document.getElementById("dd-ustensils");
 export function updateDropdowns(data) {
   const { ingredients, appliances, ustensils } = extractArraysData(data);
   
-  let ddIngredients = new Dropdown(ddIngredientsElt, ingredients, "ingredients");
-  let ddAppliance = new Dropdown(ddApplianceElt, appliances, "appliance");
-  let ddUstensils = new Dropdown(ddUstensilsElt, ustensils, "ustensils");
+  const ddIngredients = new Dropdown(ddIngredientsElt, ingredients, "ingredients");
+  const ddAppliance = new Dropdown(ddApplianceElt, appliances, "appliance");
+  const ddUstensils = new Dropdown(ddUstensilsElt, ustensils, "ustensils");
   
   ddIngredients.renderList();
   ddAppliance.renderList();

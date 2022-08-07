@@ -161,24 +161,22 @@ header {
   border: none;
 }
 
-.dropdown-button form input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-  /* color: transparent; */
+[data-open="false"] .dropdown-button form input::placeholder {
+  color: transparent;
 }
 
-/* .dropdown-button form input:active::placeholder,
-.dropdown-button form input:focus::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-.dropdown-button form input:active + label,
-.dropdown-button form input:focus + label {
-  display: none;
-} */
-
-.dropdown-button form label {
+[data-open="false"] .dropdown-button form label {
   position: absolute;
+}
+
+[data-open="true"] .dropdown-button form input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+[data-open="true"] .dropdown-button form label {
   display: none;
 }
+
 
 .dropdown-button img {
   flex: 1;

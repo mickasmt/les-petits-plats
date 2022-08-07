@@ -8,17 +8,39 @@ export class Dropdown {
     this.type = type;
   }
 
+  getNameTagSelected() {
+    let names = [];
+
+    if (tags.length > 0) {
+      for (let i = 0; i < tags.length; i++) {
+        names.push(tags[i].name);
+      }
+    }
+
+    return names;
+  }
+
   renderList() {
     const listElt = this.elt.querySelector("div.dropdown-list");
     listElt.innerHTML = "";
 
     const ul = document.createElement("ul");
+    const items = this.data;
+    const namesTags = this.getNameTagSelected();
 
-    if (this.data) {
-      for (let i = 0; i < this.data.length; i++) {
+    if (items.length > 0) {
+      for (let i = 0; i < items.length; i++) {
+        const name = items[i];
+
+        if(namesTags.length > 0) {
+          if(namesTags.includes(name)) {
+            continue;
+          }
+        }
+
         const li = document.createElement("li");
-        const name = this.data[i];
         li.innerHTML = name;
+
         // pass name & type in add tag function
         li.addEventListener("click", () => this.addTag(name));
 
@@ -38,35 +60,32 @@ export class Dropdown {
   }
 
   toggleDropdown() {
-    const activeArrow = this.elt.querySelector("div.dropdown-button > img");
     const allDropdowns = document.querySelectorAll("div.dropdown");
+    const arrowDropdown = this.elt.querySelector("div.dropdown-button > img");
 
     // change arrow if dropdown is open or close
-    if (activeArrow.dataset.open === "false") {
-      activeArrow.dataset.open = "true";
-      activeArrow.src = "assets/icons/arrow-up.svg";
-
+    if (this.elt.dataset.open === "false") {
+      arrowDropdown.src = "assets/icons/arrow-up.svg";
+      
       // remove w-full in all dropdown
       for (let i = 0; i < allDropdowns.length; i++) {
         const element = allDropdowns[i];
         element.classList.remove("w-full");
         element.children[1].classList.remove("flex");
       }
-
+      
       // add w-full in active dropdown
+      this.elt.dataset.open = "true";
       this.elt.classList.add("w-full");
       this.elt.children[1].classList.add("flex");
     } else {
-      activeArrow.src = "assets/icons/arrow-down.svg";
-      activeArrow.dataset.open = "false";
-
+      arrowDropdown.src = "assets/icons/arrow-down.svg";
+      
       // add w-full in active dropdown
+      this.elt.dataset.open = "false";
       this.elt.classList.remove("w-full");
       this.elt.children[1].classList.remove("flex");
     }
-
-
-
   }
 
   // tag
