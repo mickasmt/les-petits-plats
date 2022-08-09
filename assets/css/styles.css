@@ -201,12 +201,14 @@ header {
 }
 
 .dropdown-list ul {
+  width: 100%;
   columns: 3;
   -webkit-columns: 3;
   -moz-columns: 3;
 }
 
 .dropdown-list ul li {
+  margin: 0 5px;
   padding-bottom: 10px;
   cursor: pointer;
 }
@@ -304,6 +306,7 @@ header {
   -webkit-line-clamp: 6;
 }
 
+.tag span::first-letter,
 .dropdown-list ul li::first-letter,
 .recipe-card__container .details ul li::first-letter {
   text-transform: capitalize;
