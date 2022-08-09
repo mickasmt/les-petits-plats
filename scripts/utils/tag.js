@@ -11,7 +11,7 @@ var tagsSection = document.getElementById("tags-section");
  * @param {*} data Array of objects {name, type} of tag
  */
 export function updateTags(tags) {
-  if (tags) {
+  if (tags.length > 0) {
     tagsSection.innerHTML = "";
 
     for (let i = 0; i < tags.length; i++) {
@@ -19,8 +19,12 @@ export function updateTags(tags) {
       const tagCardDOM = tagsModel.renderTagCardDOM();
       tagsSection.appendChild(tagCardDOM);
     }
-
-    // search recipes after update tags array
-    filteredRecipesByTag(tags);
+  } else {
+    // return empty tags array + html
+    tags = [];
+    tagsSection.innerHTML = "";
   }
+  
+  // search recipes after update tags array
+  filteredRecipesByTag(tags);
 }
