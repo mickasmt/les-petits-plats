@@ -36,9 +36,7 @@ async function filteredRecipes(e) {
 
       // check if value is present in name / description
       if (name.includes(searchString) || desc.includes(searchString)) {
-        if (res.indexOf(recipe) === -1) {
-          res.push(recipe);
-        }
+        res.push(recipe);
       }
 
       // check if value is present in ingredients
@@ -46,14 +44,12 @@ async function filteredRecipes(e) {
         const ing = ingredients[j].ingredient.toLowerCase();
 
         if (ing.includes(searchString)) {
-          if (res.indexOf(recipe) === -1) {
-            res.push(recipe);
-          }
+          res.push(recipe);
         }
       }
     }
 
-    results = res;
+    results = [...new Set(res)];
 
     displayData(results);
     updateDropdowns(results);

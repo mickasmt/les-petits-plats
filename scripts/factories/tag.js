@@ -39,14 +39,18 @@ export function tagFactory(data) {
     return tagLabel;
   }
 
+  /**
+   * Function for remove tag in tags array
+   * @param {*} name Name of the tag
+   * @param {*} type Type of the tag
+   */
   function closeTag(name, type) {
     // remove tag selected in tags section
-    for (let i = 0; i < tags.length; i++) {
-      if(tags[i].name === name && tags[i].type === type) {
-        tags.splice(i, 1);
-        break;
+    tags.forEach((tag, idx) => {
+      if(tag.name === name && tag.type === type) {
+        tags.splice(idx, 1);
       } 
-    }
+    });
 
     // update tags array
     updateTags(tags);
