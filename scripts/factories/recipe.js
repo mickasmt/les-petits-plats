@@ -3,14 +3,10 @@
  */
 export function recipeFactory(data) {
   const {
-    id,
     name,
-    serving,
     ingredients,
     time,
     description,
-    appliances,
-    ustensiles,
   } = data;
 
   /**Check if image or video field is in data object and return DOM element
