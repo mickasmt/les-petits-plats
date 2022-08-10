@@ -14,11 +14,11 @@ export function updateTags(tags) {
   if (tags.length > 0) {
     tagsSection.innerHTML = "";
 
-    for (let i = 0; i < tags.length; i++) {
-      const tagsModel = tagFactory(tags[i]);
+    tags.forEach(tag => {
+      const tagsModel = tagFactory(tag);
       const tagCardDOM = tagsModel.renderTagCardDOM();
       tagsSection.appendChild(tagCardDOM);
-    }
+    });
   } else {
     // return empty tags array + html
     tags = [];
