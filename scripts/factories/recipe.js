@@ -3,14 +3,10 @@
  */
 export function recipeFactory(data) {
   const {
-    id,
     name,
-    serving,
     ingredients,
     time,
     description,
-    appliances,
-    ustensiles,
   } = data;
 
   /**Check if image or video field is in data object and return DOM element
@@ -46,16 +42,18 @@ export function recipeFactory(data) {
     // create ingredients list
     const ingList = document.createElement("ul");
 
-    ingredients.forEach((element) => {
+    for (let i = 0; i < ingredients.length; i++) {
+      const element = ingredients[i];
       const li = document.createElement("li");
       const line =
         element.ingredient.bold() +
         checkQuantityIngredient(element) +
         checkUnitIngredient(element);
-
+  
       li.innerHTML = line;
       ingList.appendChild(li);
-    });
+      
+    }
 
     // create recipe description
     const descriptionPar = document.createElement("p");

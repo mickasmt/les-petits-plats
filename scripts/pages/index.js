@@ -14,11 +14,12 @@ export async function displayData(recipes) {
         // remove flex css if suggest already display
         recipesSection.classList.remove('recipes-suggest');
 
-        recipes.forEach((recipe) => {
+        for (let i = 0; i < recipes.length; i++) {
+            const recipe = recipes[i];
             const recipeModel = recipeFactory(recipe);
             const recipeCardDOM = recipeModel.renderRecipeCardDOM();
             recipesSection.appendChild(recipeCardDOM);
-        });
+        }
     } else {
         // add fless css for suggestion error
         recipesSection.classList.add('recipes-suggest');
