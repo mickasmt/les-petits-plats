@@ -7,6 +7,10 @@ var ddUstensilsElt = document.getElementById("dd-ustensils");
 
 // FUNCTIONS
 
+/**
+ * Initialiaze all dropdowns with all arrays return by extrctArraysData function
+ * @param {*} data Array of all recipes after filteredRecipes function
+ */
 export function updateDropdowns(data) {
   const { ingredients, appliances, ustensils } = extractArraysData(data);
 
@@ -23,44 +27,42 @@ export function updateDropdowns(data) {
   ddUstensils.init();
 }
 
+/**
+ * Extract the array of all distinct ingredients, appliances and ustensils contains in all recipes
+ * @param {Array} data Array all recipes after filteredRecipes function
+ * @returns Array ingredients, appliances, ustensils
+ */
 function extractArraysData(data) {
   let ingredients = [];
   let appliances = [];
   let ustensils = [];
 
-  if (data) {
-    for (let i = 0; i < data.length; i++) {
-      const recipe = data[i];
+  if (data.length > 0) {
+    // regroup all appliances in all recipes
+    const appList = data
+      .filter((recipe) => recipe.appliance)
+      .map((app) => app.appliance.toLowerCase())
+      .reduce((a, b) => a.concat(b), [])
+      .sort();
+    
+    // regroup all ingredients in all recipes
+    const ingList = data
+    .filter((recipe) => recipe.ingredients)
+    .map((ing) => ing.ingredients.map((i) => i.ingredient.toLowerCase()))
+    .reduce((a, b) => a.concat(b), [])
+    .sort();
+    
+    // regroup all ustensils in all recipes
+    const ustList = data
+      .filter((recipe) => recipe.ustensils)
+      .map((ust) => ust.ustensils.map((u) => u.toLowerCase()))
+      .reduce((a, b) => a.concat(b), [])
+      .sort();
 
-      // create ingredient array dropdown list
-      if (recipe.ingredients) {
-        for (let j = 0; j < recipe.ingredients.length; j++) {
-          const ing = recipe.ingredients[j].ingredient;
-
-          if (ingredients.indexOf(ing) === -1) {
-            ingredients.push(ing);
-          }
-        }
-      }
-
-      // create ustensiles array dropdown list
-      if (recipe.ustensils) {
-        for (let j = 0; j < recipe.ustensils.length; j++) {
-          const ust = recipe.ustensils[j];
-
-          if (ustensils.indexOf(ust) === -1) {
-            ustensils.push(ust);
-          }
-        }
-      }
-
-      // create appliance array dropdown list
-      if (recipe.appliance) {
-        if (appliances.indexOf(recipe.appliance) === -1) {
-          appliances.push(recipe.appliance);
-        }
-      }
-    }
+    // remove doublons data
+    appliances = [...new Set(appList)];
+    ustensils = [...new Set(ustList)];
+    ingredients = [...new Set(ingList)];
   }
 
   return {

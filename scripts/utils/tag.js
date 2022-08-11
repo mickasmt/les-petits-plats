@@ -26,5 +26,6 @@ export function updateTags(tags) {
   }
   
   // search recipes after update tags array
+  // console.log("update");
   filteredRecipesByTag(tags);
 }

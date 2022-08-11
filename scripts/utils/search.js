@@ -20,7 +20,7 @@ async function filteredRecipes(e) {
   let res = new Array();
   console.log(mainSearchForm.value);
 
-  if(e) {
+  if (e) {
     searchString = e.target.value.toLowerCase();
   } else {
     searchString = mainSearchForm.value.toLowerCase();
@@ -76,58 +76,39 @@ export function filteredRecipesByTag(tagsSelected) {
 
   if (tagsSelected.length > 0) {
     // check all recipes for each tag selected
-    for (let i = 0; i < tagsSelected.length; i++) {
-      const nameTag = tagsSelected[i].name.toLowerCase();
-      const typeTag = tagsSelected[i].type.toLowerCase();
+    tagsSelected.forEach((tag) => {
+      const nameTag = tag.name.toLowerCase();
+      const typeTag = tag.type.toLowerCase();
 
-      for (let i = 0; i < data.length; i++) {
-        const recipe = data[i];
-        const appliance = recipe.appliance.toLowerCase();
-        const ustensils = recipe.ustensils; //ustensils array
-        const ingredients = recipe.ingredients; //ingredients array
+      switch (typeTag) {
+        case "ingredients":
+          // check if tag is present in ingredients
+          res = data.filter((recipe) =>
+            recipe.ingredients.some((ing) =>
+              ing.ingredient.toLowerCase().includes(nameTag)
+            )
+          );
 
-        switch (typeTag) {
-          case "ingredients":
-            // check if tag is present in ingredients
-            for (let j = 0; j < ingredients.length; j++) {
-              const ing = ingredients[j].ingredient.toLowerCase();
-
-              if (ing.includes(nameTag)) {
-                if (res.indexOf(recipe) === -1) {
-                  res.push(recipe);
-                }
-              }
-            }
-
-            break;
-          case "appliance":
-            // check if tag is present in appliance
-            if (appliance === nameTag) {
-              if (res.indexOf(recipe) === -1) {
-                res.push(recipe);
-              }
-            }
-            break;
-          case "ustensils":
-            // check if tag is present in ustensils
-            for (let k = 0; k < ustensils.length; k++) {
-              const ust = ustensils[k].toLowerCase();
-
-              if (ust.includes(nameTag)) {
-                if (res.indexOf(recipe) === -1) {
-                  res.push(recipe);
-                }
-              }
-            }
-            break;
-          default:
-            // error if value is not found
-            console.log(`Error ! ${value} not found`);
-        }
+          break;
+        case "appliance":
+          // check if tag is present in appliance
+          res = data.filter((recipe) =>
+            recipe.appliance.toLowerCase().includes(nameTag)
+          );
+          // res = data.filter(recipe => recipe.appliance.some(app => ing.ingredient.toLowerCase().includes(nameTag)));
+          break;
+        case "ustensils":
+          // check if tag is present in ustensils
+          res = data.filter((recipe) =>
+            recipe.ustensils.some((ust) => ust.toLowerCase().includes(nameTag))
+          );
+          break;
+        default:
+          // error if value is not found
+          console.log(`Error ! ${value} not found`);
       }
-    }
+    });
 
-    // return results
     results = res;
 
     displayData(results);
