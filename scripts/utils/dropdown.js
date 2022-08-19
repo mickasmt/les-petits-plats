@@ -1,3 +1,4 @@
+// IMPORTS
 import { Dropdown } from "../classes/dropdown.js";
 
 // VARIABLES
@@ -5,24 +6,37 @@ var ddIngredientsElt = document.getElementById("dd-ingredients");
 var ddApplianceElt = document.getElementById("dd-appliance");
 var ddUstensilsElt = document.getElementById("dd-ustensils");
 
+const ddIngredients = new Dropdown(ddIngredientsElt, "ingredients");
+const ddAppliance = new Dropdown(ddApplianceElt, "appliance");
+const ddUstensils = new Dropdown(ddUstensilsElt, "ustensils");
+
+// INIT
+ddIngredients.init();
+ddAppliance.init();
+ddUstensils.init();
+
+
 // FUNCTIONS
 
-export function updateDropdowns(data) {
+
+/**
+ * Initialiaze all dropdowns with all arrays return by extrctArraysData function
+ * @param {*} data Array of all recipes after filteredRecipes function
+ */
+ export function updateDropdowns(data) {
   const { ingredients, appliances, ustensils } = extractArraysData(data);
 
-  const ddIngredients = new Dropdown(
-    ddIngredientsElt,
-    ingredients,
-    "ingredients"
-  );
-  const ddAppliance = new Dropdown(ddApplianceElt, appliances, "appliance");
-  const ddUstensils = new Dropdown(ddUstensilsElt, ustensils, "ustensils");
-
-  ddIngredients.init();
-  ddAppliance.init();
-  ddUstensils.init();
+  ddIngredients.filteredListDropdown(ingredients, null);
+  ddAppliance.filteredListDropdown(appliances, null);
+  ddUstensils.filteredListDropdown(ustensils, null);
 }
 
+
+/**
+ * Extract the array of all distinct ingredients, appliances and ustensils contains in all recipes
+ * @param {Array} data Array all recipes after filteredRecipes function
+ * @returns Arrays ingredients, appliances, ustensils
+ */
 function extractArraysData(data) {
   let ingredients = [];
   let appliances = [];

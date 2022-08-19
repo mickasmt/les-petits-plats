@@ -2,35 +2,45 @@ import { tags } from "../utils/search.js";
 import { updateTags } from "../utils/tag.js";
 
 export class Dropdown {
-  constructor(elt, data, type) {
+  constructor(elt, type) {
     this.elt = elt;
-    this.data = data;
     this.type = type;
+    this.data = [];
   }
 
+  /**
+   * Initialize the components in the dropdown
+   */
   init() {
     // add click event on each dropdown
     this.addClickEvent();
 
     // add input event on each dropdown
     this.addInputEvent();
-
-    // display full list or filtered list
-    this.filteredListDropdown();
   }
 
   // EVENTS
+  /**
+   * Add click event for open/close the dropdown
+   */
   addClickEvent() {
     const arrow = this.elt.querySelector("div.dropdown-button > img");
     arrow.addEventListener("click", () => this.toggleDropdown());
   }
 
+  /**
+   * Add input event for filter data in the dropdown
+   */
   addInputEvent() {
     const input = this.elt.querySelector("div.dropdown-button > form > input");
-    input.addEventListener("input", (e) => this.filteredListDropdown(e));
+    input.addEventListener("input", (e) => this.filteredListDropdown(null, e));
   }
 
   // TAGS SECTION
+  /**
+   * Get all only names in tags array
+   * @returns Array of only names tags
+   */
   getNameTagSelected() {
     let names = [];
 
@@ -43,6 +53,10 @@ export class Dropdown {
     return names;
   }
 
+  /**
+   * Create and add a tag in tags array
+   * @param {string} name 
+   */
   addTag(name) {
     // add tag selected in tag array
     tags.push({
@@ -59,6 +73,9 @@ export class Dropdown {
   }
 
   // DROPDOWN SECTION
+  /**
+   * Open/close active dropdown & close others dropdowns
+   */
   toggleDropdown() {
     const allDropdowns = document.querySelectorAll("div.dropdown");
     const arrowDropdown = this.elt.querySelector("div.dropdown-button > img");
@@ -93,6 +110,10 @@ export class Dropdown {
     }
   }
 
+  /**
+   * Render the list of items in the dropdown (DOM)
+   * @param {Array} items 
+   */
   renderList(items) {
     const listElt = this.elt.querySelector("div.dropdown-list");
     listElt.innerHTML = "";
@@ -135,11 +156,20 @@ export class Dropdown {
     listElt.appendChild(ul);
   }
 
-  filteredListDropdown(e) {
+  /**
+   * Filter the data if user insert value in the input dropdown
+   * @param {Array} data Array of items (ingredients, appliances, ustensils)
+   * @param {*} event Event if user insert value in the input
+   * @returns RenderList method for create the dom element
+   */
+  filteredListDropdown(data, event) {
+    if(data) {
+      this.data = data;
+    }
     // return full data if not input event
-    if (!e) return this.renderList(this.data);
+    if (!event) return this.renderList(this.data);
 
-    const searchString = e.target.value.toLowerCase();
+    const searchString = event.target.value.toLowerCase();
     let response = new Array();
 
     // if input value is superior at 2
