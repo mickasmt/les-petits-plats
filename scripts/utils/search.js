@@ -13,12 +13,12 @@ mainSearchForm.addEventListener("input", (e) => filteredRecipes(e));
 
 /**
  * Search recipes (in name/description/ingredients) with value input
- * @param {*} e Event for get value input
+ * @param {*} e Event for get value input || nullable 
  */
-async function filteredRecipes(e) {
+export function filteredRecipes(e) {
   let searchString;
   let res = new Array();
-  console.log(mainSearchForm.value);
+  // console.log(mainSearchForm.value);
 
   if (e) {
     searchString = e.target.value.toLowerCase();
@@ -60,10 +60,9 @@ async function filteredRecipes(e) {
 }
 
 /**
- *
- * @param {string} tags tags selected
+ * Search recipes (in ingredients/appliance/ustensils) with tags array
  */
-export function filteredRecipesByTag(tagsSelected) {
+export function filteredRecipesByTag() {
   // get all recipes or results after one first research
   let data;
   let res = new Array();
@@ -74,46 +73,42 @@ export function filteredRecipesByTag(tagsSelected) {
     data = recipes;
   }
 
-  if (tagsSelected.length > 0) {
-    // check all recipes for each tag selected
-    tagsSelected.forEach((tag) => {
-      const nameTag = tag.name.toLowerCase();
-      const typeTag = tag.type.toLowerCase();
+  // check all recipes for each tag selected
+  tags.forEach((tag) => {
+    const nameTag = tag.name.toLowerCase();
+    const typeTag = tag.type.toLowerCase();
 
-      switch (typeTag) {
-        case "ingredients":
-          // check if tag is present in ingredients
-          res = data.filter((recipe) =>
-            recipe.ingredients.some((ing) =>
-              ing.ingredient.toLowerCase().includes(nameTag)
-            )
-          );
+    switch (typeTag) {
+      case "ingredients":
+        // check if tag is present in ingredients
+        res = data.filter((recipe) =>
+          recipe.ingredients.some((ing) =>
+            ing.ingredient.toLowerCase().includes(nameTag)
+          )
+        );
 
-          break;
-        case "appliance":
-          // check if tag is present in appliance
-          res = data.filter((recipe) =>
-            recipe.appliance.toLowerCase().includes(nameTag)
-          );
-          // res = data.filter(recipe => recipe.appliance.some(app => ing.ingredient.toLowerCase().includes(nameTag)));
-          break;
-        case "ustensils":
-          // check if tag is present in ustensils
-          res = data.filter((recipe) =>
-            recipe.ustensils.some((ust) => ust.toLowerCase().includes(nameTag))
-          );
-          break;
-        default:
-          // error if value is not found
-          console.log(`Error ! ${value} not found`);
-      }
-    });
+        break;
+      case "appliance":
+        // check if tag is present in appliance
+        res = data.filter((recipe) =>
+          recipe.appliance.toLowerCase().includes(nameTag)
+        );
+        // res = data.filter(recipe => recipe.appliance.some(app => ing.ingredient.toLowerCase().includes(nameTag)));
+        break;
+      case "ustensils":
+        // check if tag is present in ustensils
+        res = data.filter((recipe) =>
+          recipe.ustensils.some((ust) => ust.toLowerCase().includes(nameTag))
+        );
+        break;
+      default:
+        // error if value is not found
+        console.log(`Error ! ${value} not found`);
+    }
 
-    results = res;
+    data = [...new Set(res)];
+  });
 
-    displayData(results);
-    updateDropdowns(results);
-  } else {
-    filteredRecipes();
-  }
+  displayData(data);
+  updateDropdowns(data);
 }

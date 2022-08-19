@@ -2,23 +2,20 @@ import { tags } from "../utils/search.js";
 import { updateTags } from "../utils/tag.js";
 
 export class Dropdown {
-  constructor(elt, data, type) {
+  constructor(elt, type) {
     this.elt = elt;
-    this.data = data;
     this.type = type;
+    this.data = [];
   }
 
   init() {
-    // add click event on each dropdown
-    this.addClickEvent();
-
     // add input event on each dropdown
     this.addInputEvent();
-
-    // display full list or filtered list
-    this.filteredListDropdown();
+    
+    // add click event on each dropdown
+    this.addClickEvent();
   }
-
+  
   // EVENTS
   addClickEvent() {
     const arrow = this.elt.querySelector("div.dropdown-button > img");
@@ -27,7 +24,7 @@ export class Dropdown {
 
   addInputEvent() {
     const input = this.elt.querySelector("div.dropdown-button > form > input");
-    input.addEventListener("input", (e) => this.filteredListDropdown(e));
+    input.addEventListener("input", (e) => this.filteredListDropdown(null, e));
   }
 
   // TAGS SECTION
@@ -60,21 +57,21 @@ export class Dropdown {
 
   // DROPDOWN SECTION
   toggleDropdown() {
+    console.log(this.elt);
     const allDropdowns = document.querySelectorAll("div.dropdown");
     const arrowDropdown = this.elt.querySelector("div.dropdown-button > img");
 
     // change arrow if dropdown is open or close
     if (this.elt.dataset.open === "false") {
       // close all dropdowns if open new dropdown
-      for (let i = 0; i < allDropdowns.length; i++) {
-        const element = allDropdowns[i];
+      allDropdowns.forEach((element) => {
         const arrow_elt = element.querySelector("div.dropdown-button > img");
         
         arrow_elt.src = "assets/icons/arrow-down.svg";
         element.dataset.open = "false";
         element.classList.remove("w-full");
         element.children[1].classList.remove("flex");
-      }
+      })
       
       // display arrow up img
       arrowDropdown.src = "assets/icons/arrow-up.svg";
@@ -101,15 +98,7 @@ export class Dropdown {
     const namesTags = this.getNameTagSelected();
 
     if (items.length > 0) {
-      for (let i = 0; i < items.length; i++) {
-        const name = items[i];
-
-        if (namesTags.length > 0) {
-          if (namesTags.includes(name)) {
-            continue;
-          }
-        }
-
+      items.filter(item => !namesTags.includes(item)).forEach((name) => {
         const li = document.createElement("li");
         li.tabIndex = 0;
         li.innerHTML = name;
@@ -124,7 +113,8 @@ export class Dropdown {
         });
 
         ul.appendChild(li);
-      }
+      });
+      
     } else {
       // create not found message
       const li = document.createElement("li");
@@ -135,11 +125,15 @@ export class Dropdown {
     listElt.appendChild(ul);
   }
 
-  filteredListDropdown(e) {
+  filteredListDropdown(data, event) {
+    if(data) {
+      this.data = data;
+    }
+    
     // return full data if not input event
-    if (!e) return this.renderList(this.data);
+    if (!event) return this.renderList(this.data);
 
-    const searchString = e.target.value.toLowerCase();
+    const searchString = event.target.value.toLowerCase();
     let response = new Array();
 
     // if input value is superior at 2
@@ -147,7 +141,7 @@ export class Dropdown {
       for (let i = 0; i < this.data.length; i++) {
         const name = this.data[i].toLowerCase();
 
-        // check if value is present in data
+        // check if value is present in this.data
         if (name.includes(searchString)) {
           response.push(name);
         }

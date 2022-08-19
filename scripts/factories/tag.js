@@ -5,10 +5,7 @@ import { updateTags } from "../utils/tag.js";
  * @param  {object} data
  */
 export function tagFactory(data) {
-  const {
-    name,
-    type
-  } = data;
+  const { name, type } = data;
 
   /**Create and return one tag DOM for index.html
    */
@@ -28,7 +25,7 @@ export function tagFactory(data) {
     const btnClose = document.createElement("button");
     btnClose.appendChild(closeImg);
     btnClose.addEventListener("click", () => closeTag(name, type));
-    
+
     // assemble tag name/button close
     const tagLabel = document.createElement("div");
     tagLabel.classList.add("tag");
@@ -45,12 +42,9 @@ export function tagFactory(data) {
    * @param {*} type Type of the tag
    */
   function closeTag(name, type) {
-    // remove tag selected in tags section
-    tags.forEach((tag, idx) => {
-      if(tag.name === name && tag.type === type) {
-        tags.splice(idx, 1);
-      } 
-    });
+    // remove tag selected in tags section with index
+    const indexTag = tags.findIndex((tag) => tag.name === name && tag.type === type);
+    tags.splice(indexTag, 1);
 
     // update tags array
     updateTags(tags);

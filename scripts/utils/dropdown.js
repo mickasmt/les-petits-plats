@@ -5,6 +5,15 @@ var ddIngredientsElt = document.getElementById("dd-ingredients");
 var ddApplianceElt = document.getElementById("dd-appliance");
 var ddUstensilsElt = document.getElementById("dd-ustensils");
 
+
+const ddIngredients = new Dropdown(ddIngredientsElt, "ingredients");
+const ddAppliance = new Dropdown(ddApplianceElt, "appliance");
+const ddUstensils = new Dropdown(ddUstensilsElt, "ustensils");
+
+ddIngredients.init();
+ddAppliance.init();
+ddUstensils.init();
+
 // FUNCTIONS
 
 /**
@@ -14,17 +23,9 @@ var ddUstensilsElt = document.getElementById("dd-ustensils");
 export function updateDropdowns(data) {
   const { ingredients, appliances, ustensils } = extractArraysData(data);
 
-  const ddIngredients = new Dropdown(
-    ddIngredientsElt,
-    ingredients,
-    "ingredients"
-  );
-  const ddAppliance = new Dropdown(ddApplianceElt, appliances, "appliance");
-  const ddUstensils = new Dropdown(ddUstensilsElt, ustensils, "ustensils");
-
-  ddIngredients.init();
-  ddAppliance.init();
-  ddUstensils.init();
+  ddIngredients.filteredListDropdown(ingredients, null);
+  ddAppliance.filteredListDropdown(appliances, null);
+  ddUstensils.filteredListDropdown(ustensils, null);
 }
 
 /**
