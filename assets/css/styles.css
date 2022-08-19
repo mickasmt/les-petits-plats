@@ -133,6 +133,7 @@ header {
   padding: 23px 15px;
   border-radius: 5px;
   width: 170px;
+  min-width: 170px;
   height: 69px;
   margin-right: 20px;
 }
