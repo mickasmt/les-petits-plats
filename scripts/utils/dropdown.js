@@ -1,3 +1,4 @@
+// IMPORTS
 import { Dropdown } from "../classes/dropdown.js";
 
 // VARIABLES
@@ -5,17 +6,17 @@ var ddIngredientsElt = document.getElementById("dd-ingredients");
 var ddApplianceElt = document.getElementById("dd-appliance");
 var ddUstensilsElt = document.getElementById("dd-ustensils");
 
-
 const ddIngredients = new Dropdown(ddIngredientsElt, "ingredients");
 const ddAppliance = new Dropdown(ddApplianceElt, "appliance");
 const ddUstensils = new Dropdown(ddUstensilsElt, "ustensils");
 
+// INIT
 ddIngredients.init();
 ddAppliance.init();
 ddUstensils.init();
 
-// FUNCTIONS
 
+// FUNCTIONS
 /**
  * Initialiaze all dropdowns with all arrays return by extrctArraysData function
  * @param {*} data Array of all recipes after filteredRecipes function
@@ -34,9 +35,7 @@ export function updateDropdowns(data) {
  * @returns Array ingredients, appliances, ustensils
  */
 function extractArraysData(data) {
-  let ingredients = [];
-  let appliances = [];
-  let ustensils = [];
+  let ingredients, appliances, ustensils;
 
   if (data.length > 0) {
     // regroup all appliances in all recipes

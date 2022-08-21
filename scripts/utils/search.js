@@ -9,45 +9,25 @@ export let results = new Array();
 var mainSearchForm = document.getElementById("mainSearch");
 
 // EVENTS
-mainSearchForm.addEventListener("input", (e) => filteredRecipes(e));
+mainSearchForm.addEventListener("input", () => filteredRecipes());
 
 /**
  * Search recipes (in name/description/ingredients) with value input
- * @param {*} e Event for get value input || nullable 
  */
-export function filteredRecipes(e) {
-  let searchString;
+export function filteredRecipes() {
   let res = new Array();
-  // console.log(mainSearchForm.value);
-
-  if (e) {
-    searchString = e.target.value.toLowerCase();
-  } else {
-    searchString = mainSearchForm.value.toLowerCase();
-  }
+  let searchString = mainSearchForm.value.toLowerCase();
 
   // if input value is superior at 2
   if (searchString.length > 2) {
-    for (let i = 0; i < recipes.length; i++) {
-      const recipe = recipes[i];
-      const name = recipe.name.toLowerCase();
-      const desc = recipe.description.toLowerCase();
-      const ingredients = recipe.ingredients; //ingredients array
-
-      // check if value is present in name / description
-      if (name.includes(searchString) || desc.includes(searchString)) {
-        res.push(recipe);
-      }
-
-      // check if value is present in ingredients
-      for (let j = 0; j < ingredients.length; j++) {
-        const ing = ingredients[j].ingredient.toLowerCase();
-
-        if (ing.includes(searchString)) {
-          res.push(recipe);
-        }
-      }
-    }
+    res = recipes.filter(
+      (recipe) =>
+        recipe.name.toLowerCase().includes(searchString) ||
+        recipe.description.toLowerCase().includes(searchString) ||
+        recipe.ingredients.some((ing) =>
+        ing.ingredient.toLowerCase().includes(searchString)
+      )
+    );
 
     results = [...new Set(res)];
 
