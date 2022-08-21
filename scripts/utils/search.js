@@ -9,22 +9,14 @@ export let results = new Array();
 var mainSearchForm = document.getElementById("mainSearch");
 
 // EVENTS
-mainSearchForm.addEventListener("input", (e) => filteredRecipes(e));
+mainSearchForm.addEventListener("input", () => filteredRecipes());
 
 /**
  * Search recipes (in name/description/ingredients) with value input
- * @param {*} e Event for get value input
  */
-async function filteredRecipes(e) {
-  let searchString;
+async function filteredRecipes() {
   let res = new Array();
-  console.log(mainSearchForm.value);
-
-  if(e) {
-    searchString = e.target.value.toLowerCase();
-  } else {
-    searchString = mainSearchForm.value.toLowerCase();
-  }
+  let searchString = mainSearchForm.value.toLowerCase();
 
   // if input value is superior at 2
   if (searchString.length > 2) {
