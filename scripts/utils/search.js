@@ -33,9 +33,12 @@ export function filteredRecipes() {
 
     displayData(results);
     updateDropdowns(results);
+    filteredRecipesByTag();
   } else {
+    results = [];
     displayData(recipes);
     updateDropdowns(recipes);
+    filteredRecipesByTag();
   }
 }
 
