@@ -57,7 +57,7 @@ export class Dropdown {
 
   // DROPDOWN SECTION
   toggleDropdown() {
-    console.log(this.elt);
+    // console.log(this.elt);
     const allDropdowns = document.querySelectorAll("div.dropdown");
     const arrowDropdown = this.elt.querySelector("div.dropdown-button > img");
 

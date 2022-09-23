@@ -1,7 +1,7 @@
 // IMPORTS
 import { recipes } from "../../data/recipes.js";
 import { recipeFactory } from "../factories/recipe.js";
-import { updateDropdowns } from "../utils/dropdown.js";
+import { updateData } from "../utils/search.js";
 
 /**Add all cards recipes in photographer_section on index.html
  * @param  {object} recipes Data of all recipes
@@ -31,8 +31,7 @@ export async function displayData(recipes) {
  */
 async function init() {
     // display recipes
-    displayData(recipes);
-    updateDropdowns(recipes);
+    updateData(recipes)
 }
 
 init();
